@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    comands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt -t lib
+  build:
+    comands:
+      - echo "Zipping deployment package..."
+      - cd lib
+      - zip -r9 ../deployment_package.zip .
+      - cd ..
+      - zip -g deployment_package.zip lambda_function.py    
+  post_build:
+    comands:
+      - echo "Updating lambda Function..."
+      - aws lamda update-function-code --function-name demo-lambda --zip-file fileb://deployment_package.zip
+      - echo "DONE!!"

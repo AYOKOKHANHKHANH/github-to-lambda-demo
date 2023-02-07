@@ -1,8 +1,5 @@
 def lambda_handler(event, context):
-    return bieuthuc(event['a'], event['b'], event['c'])
+    return tong2so(event['a'], event['b'])
 
 def tong2so(a,b):
     return a+b
-
-def bieuthuc(a,b,c):
-    return tong2so*a-b+c
